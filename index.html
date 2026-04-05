@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Financial Dashboard</h1>
+        <div class="controls">
+            <label for="role-switch">Role:</label>
+            <select id="role-switch">
+                <option value="admin">Admin</option>
+                <option value="viewer">Viewer</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <section class="summary-cards">
+            <div class="card">
+                <h3>Total Balance</h3>
+                <p id="total-balance">$0.00</p>
+            </div>
+            <div class="card income">
+                <h3>Total Income</h3>
+                <p id="total-income">$0.00</p>
+            </div>
+            <div class="card expense">
+                <h3>Total Expenses</h3>
+                <p id="total-expense">$0.00</p>
+            </div>
+        </section>
+
+        <section class="visualizations">
+            <div class="chart-container">
+                <h3>Income vs. Expenses (Trend)</h3>
+                <canvas id="trendChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Spending by Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </section>
+
+        <section class="insights-section">
+            <h3>Key Insights</h3>
+            <ul id="insights-list">
+                </ul>
+        </section>
+
+        <section id="admin-panel" class="admin-only">
+            <h3>Add New Transaction</h3>
+            <form id="add-transaction-form">
+                <input type="date" id="t-date" required>
+                <input type="text" id="t-desc" placeholder="Description" required>
+                <input type="number" id="t-amount" placeholder="Amount" step="0.01" required>
+                <select id="t-category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Salary">Salary</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Food">Food</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Entertainment">Entertainment</option>
+                </select>
+                <select id="t-type" required>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <button type="submit">Add Transaction</button>
+            </form>
+        </section>
+
+        <section class="transactions-section">
+            <div class="table-header">
+                <h3>Recent Transactions</h3>
+                <input type="text" id="search-input" placeholder="Search transactions...">
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th class="admin-only">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-body">
+                        </tbody>
+                </table>
+            </div>
+            <p id="empty-state" class="hidden">No transactions found.</p>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
